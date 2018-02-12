@@ -8,7 +8,7 @@ import ComponentPropsSubComponent from './ComponentPropsComponent'
 
 const ComponentPropsComponents = ({ activeName, components, onItemClick, parent }) =>
   components.length > 1 && (
-    <Menu color='green' compact size='small' secondary>
+    <Menu size='small' secondary pointing vertical fluid>
       {_.map(components, component => (
         <ComponentPropsSubComponent
           active={activeName === component}

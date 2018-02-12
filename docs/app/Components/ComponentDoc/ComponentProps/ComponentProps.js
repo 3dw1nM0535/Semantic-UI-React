@@ -1,13 +1,14 @@
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { Grid } from 'semantic-ui-react'
 
 import ComponentTable from '../ComponentTable'
 import ComponentPropsComponents from './ComponentPropsComponents'
 import ComponentPropsDescription from './ComponentPropsDescription'
 import ComponentPropsHeader from './ComponentPropsHeader'
 
-const propsContainerStyle = { overflowX: 'auto' }
+const propsContainerStyle = { overflowX: 'auto', flex: '1' }
 
 export default class ComponentProps extends Component {
   static propTypes = {
@@ -45,24 +46,33 @@ export default class ComponentProps extends Component {
 
     return (
       <div>
-        <ComponentPropsHeader
-          hasSubComponents={componentNames.length > 1}
-          showProps={!!activeName}
-          onClick={this.handleToggle}
-        />
-        <ComponentPropsComponents
-          activeName={activeName}
-          components={componentNames}
-          onItemClick={this.handleComponentClick}
-          parent={componentName}
-        />
-
-        {activeName && (
-          <div style={propsContainerStyle}>
-            <ComponentPropsDescription description={description} />
-            <ComponentTable name={activeName} props={props} />
-          </div>
-        )}
+        <Grid columns='equal'>
+          <Grid.Row>
+            <Grid.Column>
+              <ComponentPropsHeader
+                componentName={componentName}
+                showProps={!!activeName}
+                onClick={this.handleToggle}
+              />
+            </Grid.Column>
+          </Grid.Row>
+          {activeName && (
+            <Grid.Column style={{ flex: '0 0 11em' }}>
+              <ComponentPropsComponents
+                activeName={activeName}
+                components={componentNames}
+                onItemClick={this.handleComponentClick}
+                parent={componentName}
+              />
+            </Grid.Column>
+          )}
+          {activeName && (
+            <Grid.Column>
+              <ComponentPropsDescription description={description} />
+              <ComponentTable name={activeName} props={props} />
+            </Grid.Column>
+          )}
+        </Grid>
       </div>
     )
   }

@@ -14,7 +14,6 @@ import ComponentExamples from './ComponentExamples'
 import ComponentProps from './ComponentProps'
 import ComponentSidebar from './ComponentSidebar'
 
-const topRowStyle = { margin: '1em' }
 const exampleEndStyle = {
   textAlign: 'center',
   opacity: 0.5,
@@ -81,7 +80,7 @@ class ComponentDoc extends Component {
     return (
       <DocumentTitle title={`${componentName} | Semantic UI React`}>
         <Grid>
-          <Grid.Row columns='equal' style={topRowStyle}>
+          <Grid.Row columns='equal'>
             <Grid.Column>
               <ComponentDocHeader componentName={componentName} description={description} />
               <ComponentDocSee items={seeItems} />
@@ -92,12 +91,6 @@ class ComponentDoc extends Component {
                 suiLink={suiLink}
               />
               <ComponentProps componentGroup={componentGroup} componentName={componentName} />
-            </Grid.Column>
-            <Grid.Column computer={5} largeScreen={4} widescreen={4} />
-          </Grid.Row>
-
-          <Grid.Row columns='equal'>
-            <Grid.Column>
               <div ref={this.handleExamplesRef}>
                 <ComponentExamples componentName={componentName} />
               </div>

@@ -1,43 +1,22 @@
-import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Header, Icon } from 'semantic-ui-react'
+import { Button, Icon, Header } from 'semantic-ui-react'
 
 import { updateForKeys } from 'docs/app/HOC'
 
-const headerStyle = {
-  cursor: 'pointer',
-  display: 'inline-flex',
-  margin: '1em 0.5em',
-  marginLeft: 0,
-}
-
-const linkStyle = { color: 'inherit' }
-
-const ComponentPropsHeader = ({ hasSubComponents, onClick, showProps }) => {
-  const iconClasses = cx(
-    showProps ? 'on' : 'off',
-    'toggle',
-  )
-
-  return (
-    <Header
-      as='h4'
-      className='no-anchor'
-      color={showProps ? 'green' : 'grey'}
-      style={headerStyle}
-      onClick={onClick}
-    >
-      <a style={linkStyle}>
-        <Icon name={iconClasses} />
-        Props{hasSubComponents && ':'}
-      </a>
+const ComponentPropsHeader = ({ componentName, onClick, showProps }) => (
+  <div style={{ textAlign: 'center' }}>
+    <Header as='h2' color='grey' textAlign='center'>
+      {componentName} Props
     </Header>
-  )
-}
+    <Button icon compact toggle active={showProps} onClick={onClick}>
+      <Icon link name={showProps ? 'hide' : 'unhide'} />
+    </Button>
+  </div>
+)
 
 ComponentPropsHeader.propTypes = {
-  hasSubComponents: PropTypes.bool,
+  componentName: PropTypes.string,
   onClick: PropTypes.func,
   showProps: PropTypes.bool,
 }

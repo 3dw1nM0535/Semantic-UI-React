@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, { Component, createElement } from 'react'
 
 import { exampleContext } from 'docs/app/utils'
-import { Grid } from 'src'
+import { Grid, Header } from 'semantic-ui-react'
 import ContributionPrompt from './ContributionPrompt'
 
 export default class ComponentExamples extends Component {
@@ -33,6 +33,15 @@ export default class ComponentExamples extends Component {
   }
 
   render() {
-    return this.renderExamples() || this.renderMissingExamples()
+    const { componentName } = this.props
+    return (
+      <div>
+        <Header as='h2' color='grey' textAlign='center'>
+          {componentName} Examples
+        </Header>
+
+        {this.renderExamples() || this.renderMissingExamples()}
+      </div>
+    )
   }
 }

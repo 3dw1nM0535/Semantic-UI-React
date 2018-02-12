@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Accordion, Menu, Sticky } from 'semantic-ui-react'
+import { Accordion, Header, Menu, Sticky } from 'semantic-ui-react'
 
 import menuInfo from 'docs/app/menuInfo.json'
 import ComponentSideBarSection from './ComponentSidebarSection'
@@ -39,28 +39,32 @@ class ComponentSidebar extends Component {
   handleItemClick = (e, { path }) => _.invoke(this.props, 'onItemClick', e, { path })
 
   render() {
-    const { activePath, examplesRef } = this.props
+    const { activePath, componentName, examplesRef } = this.props
     const { sections } = this.state
 
     return (
       <Sticky context={examplesRef} offset={15}>
-        <Menu
-          as={Accordion}
-          fluid
-          style={sidebarStyle}
-          text
-          vertical
-        >
-          {_.map(sections, ({ examples, name }) => (
-            <ComponentSideBarSection
-              activePath={activePath}
-              examples={examples}
-              key={name}
-              name={name}
-              onItemClick={this.handleItemClick}
-            />
-          ))}
-        </Menu>
+        <div>
+          <Header as='a' href={_.kebabCase(`#${componentName}-props`)}>Props</Header>
+          <Header as='a' href={_.kebabCase(`#${componentName}-examples`)}>Examples</Header>
+          <Menu
+            as={Accordion}
+            fluid
+            style={sidebarStyle}
+            text
+            vertical
+          >
+            {_.map(sections, ({ examples, name }) => (
+              <ComponentSideBarSection
+                activePath={activePath}
+                examples={examples}
+                key={name}
+                name={name}
+                onItemClick={this.handleItemClick}
+              />
+            ))}
+          </Menu>
+        </div>
       </Sticky>
     )
   }
